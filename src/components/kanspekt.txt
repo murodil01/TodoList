@@ -7,6 +7,37 @@ Qachon ishlatiladi?
 Masalan: Modal, Popover, Tooltip larni body tagiga joylashtirish uchun ishlatiladi, 
 chunki ular boshqa konteynerlarga bog‘liq bo‘lmasligi kerak.
 
+
+import * as React from 'react';
+import Portal from '@mui/material/Portal';
+import { Box } from '@mui/system';
+
+export default function SimplePortal() {
+  const [show, setShow] = React.useState(false);
+  const container = React.useRef(null);
+
+  const handleClick = () => {
+    setShow(!show);
+  };
+
+  return (
+    <div>
+      <button type="button" onClick={handleClick}>
+        {show ? 'Unmount children' : 'Mount children'}
+      </button>
+      <Box sx={{ p: 1, my: 1, border: '1px solid' }}>
+        It looks like I will render here.
+        {show ? (
+          <Portal container={() => container.current}>
+            <span>But I actually render here!</span>
+          </Portal>
+        ) : null}
+      </Box>
+      <Box sx={{ p: 1, my: 1, border: '1px solid' }} ref={container} />
+    </div>
+  );
+}
+
 2. TextareaAutosize
 Nima?
 Bu textarea bo‘lib, foydalanuvchi yozgan matn bo‘yicha avtomatik ravishda balandligini o‘zgartiradi.
@@ -14,6 +45,18 @@ Bu textarea bo‘lib, foydalanuvchi yozgan matn bo‘yicha avtomatik ravishda ba
 Qachon ishlatiladi?
 Foydalanuvchi uzoq matn kiritishi mumkin bo‘lgan joylarda — izohlar, sharhlar yozish formalarida.
 
+import * as React from 'react';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+
+export default function EmptyTextarea() {
+  return (
+    <TextareaAutosize
+      aria-label="empty textarea"
+      placeholder="Empty"
+      style={{ width: 200 }}
+    />
+  );
+}
 3. Transitions
 Nima?
 MUI’da Transition komponentlar — animatsiya (kirish, chiqish) effektlarini qo‘shish uchun ishlatiladi.
@@ -22,9 +65,87 @@ Qachon ishlatiladi?
 Modal, Snackbar, Collapse, Fade, Grow, Slide, 
 Zoom kabi joylarda kirish/chiqish animatsiyalarini boshqarish uchun.
 
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Switch from '@mui/material/Switch';
+import Paper from '@mui/material/Paper';
+import Collapse from '@mui/material/Collapse';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
+const icon = (
+  <Paper sx={{ m: 1, width: 100, height: 100 }} elevation={4}>
+    <svg>
+      <Box
+        component="polygon"
+        points="0,100 50,00, 100,100"
+        sx={(theme) => ({
+          fill: theme.palette.common.white,
+          stroke: theme.palette.divider,
+          strokeWidth: 1,
+        })}
+      />
+    </svg>
+  </Paper>
+);
+
+export default function SimpleCollapse() {
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
+
+  return (
+    <Box sx={{ height: 300 }}>
+      <FormControlLabel
+        control={<Switch checked={checked} onChange={handleChange} />}
+        label="Show"
+      />
+      <Box
+        sx={{
+          '& > :not(style)': {
+            display: 'flex',
+            justifyContent: 'space-around',
+            height: 120,
+            width: 250,
+          },
+        }}
+      >
+        <div>
+          <Collapse in={checked}>{icon}</Collapse>
+          <Collapse in={checked} collapsedSize={40}>
+            {icon}
+          </Collapse>
+        </div>
+        <div>
+          <Box sx={{ width: '50%' }}>
+            <Collapse orientation="horizontal" in={checked}>
+              {icon}
+            </Collapse>
+          </Box>
+          <Box sx={{ width: '50%' }}>
+            <Collapse orientation="horizontal" in={checked} collapsedSize={40}>
+              {icon}
+            </Collapse>
+          </Box>
+        </div>
+      </Box>
+    </Box>
+  );
+}
+
 4. useMediaQuery
 Nima?
 Bu hook bo‘lib, ekran o‘lchamiga qarab shartli rendering qilish imkonini beradi (responsive dizayn uchun).
 
 Qachon ishlatiladi?
 Masalan: agar ekran 600px dan kichik bo‘lsa, boshqa komponentni ko‘rsatish uchun.
+
+import * as React from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+export default function SimpleMediaQuery() {
+  const matches = useMediaQuery('(min-width:600px)');
+
+  return <span>{`(min-width:600px) matches: ${matches}`}</span>;
+}
