@@ -1,0 +1,30 @@
+Konspekt
+1. Portal
+Nima?
+Portal — bu komponentni DOM'dagi boshqa joyga "teleport" qilib joylashtirish imkonini beradi.
+
+Qachon ishlatiladi?
+Masalan: Modal, Popover, Tooltip larni body tagiga joylashtirish uchun ishlatiladi, 
+chunki ular boshqa konteynerlarga bog‘liq bo‘lmasligi kerak.
+
+2. TextareaAutosize
+Nima?
+Bu textarea bo‘lib, foydalanuvchi yozgan matn bo‘yicha avtomatik ravishda balandligini o‘zgartiradi.
+
+Qachon ishlatiladi?
+Foydalanuvchi uzoq matn kiritishi mumkin bo‘lgan joylarda — izohlar, sharhlar yozish formalarida.
+
+3. Transitions
+Nima?
+MUI’da Transition komponentlar — animatsiya (kirish, chiqish) effektlarini qo‘shish uchun ishlatiladi.
+
+Qachon ishlatiladi?
+Modal, Snackbar, Collapse, Fade, Grow, Slide, 
+Zoom kabi joylarda kirish/chiqish animatsiyalarini boshqarish uchun.
+
+4. useMediaQuery
+Nima?
+Bu hook bo‘lib, ekran o‘lchamiga qarab shartli rendering qilish imkonini beradi (responsive dizayn uchun).
+
+Qachon ishlatiladi?
+Masalan: agar ekran 600px dan kichik bo‘lsa, boshqa komponentni ko‘rsatish uchun.
